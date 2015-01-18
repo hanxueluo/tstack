@@ -1,0 +1,22 @@
+#!/bin/sh -e
+[ $# -ne 2 ] && { echo "Usage: `basename $0` pid location" 1>&2; exit 1;} 
+pid=$1
+location=$2
+gdb --quiet -nx /proc/$pid/exe $pid <<EOF 2>&1 |
+define tracestack
+    break \$arg0
+    commands
+        echo ###\n###\n
+        backtrace
+        continue
+    end
+end
+tracestack $location
+# add tracestack here, if you want to trace more functions
+continue
+EOF
+/bin/sed -n \
+        -e '/^(gbd)/p' \
+        -e '/^#/p' \
+        -e '/^Thread/p'
+
