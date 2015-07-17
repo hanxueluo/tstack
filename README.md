@@ -1,7 +1,7 @@
 # Tstack
 
 
-Tool to log function callstack of running programs. It wraps gdb around, borrowing the idea from pstack.
+Tstack wraps gdb around, borrowing the idea from **pstack**.It logs callstack of specified function of running program. 
 
 ##How to use
 
@@ -11,6 +11,6 @@ Tool to log function callstack of running programs. It wraps gdb around, borrowi
 ./tstack $PID $FUNC
 ```
 
-*$PID is the pid of the program. $FUNC is the function name you want to trace.*
+$PID is the pid of the program. $FUNC is the function name you want to trace.
 
 ###Use Ctrl+C to Stop.
