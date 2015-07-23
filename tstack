@@ -1,7 +1,16 @@
 #!/bin/sh -e
-[ $# -ne 2 ] && { echo "Usage: `basename $0` pid location" 1>&2; exit 1;} 
+[ $# -lt 2 ] && { echo "Usage: `basename $0` pid breakpoint ..." 1>&2; exit 1;}
 pid=$1
-location=$2
+shift
+
+trace_commands=
+while [ "$1" ]
+do
+    trace_commands="$trace_commands
+    tracestack $1"
+    shift
+done
+echo $trace_commands
 gdb --quiet -nx /proc/$pid/exe $pid <<EOF 2>&1 |
 define tracestack
     break \$arg0
@@ -11,7 +20,7 @@ define tracestack
         continue
     end
 end
-tracestack $location
+$trace_commands
 # add tracestack here, if you want to trace more functions
 continue
 EOF
