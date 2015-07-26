@@ -2,17 +2,17 @@
 # Tstack
 
 
-Tstack wraps gdb around, borrowing the idea from **pstack**.It logs callstack of specified breakpoint of running program. 
+Tstack wraps gdb around, borrowing the idea from **pstack**.It logs callstack of specified breakpoints of running program. 
 
 ##How to start
 
-- Simply use the tstack like command below:
+- Simply use the tstack command as below:
 
 ```Shell
 ./tstack $PID $BREAKPOINT
 ```
 
-where \$PID is the pid of the program. \$BREAKPOINT is the point you want to trace. It can be a function name or code line. It's just what means in gdb.
+where \$PID is the pid of the program. \$BREAKPOINT is the point you want to trace. It can be a function name or location of code, just same with what means in gdb.
 
 - Use the tstack to trace multiple beakpoints:
 
@@ -22,7 +22,7 @@ where \$PID is the pid of the program. \$BREAKPOINT is the point you want to tra
 - trace on condition:
 
 ```Shell
-./tstack $PID "$BREAKPOINT if $CONDTION" ...
+./tstack $PID "$BREAKPOINT if $CONDITION" ...
 ```
 
 A condition is just a gdb condition expression for breakpoint.
